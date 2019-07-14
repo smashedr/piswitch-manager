@@ -1,0 +1,21 @@
+[Unit]
+Description=PiSwitch gunicorn process
+After=network.target
+
+[Service]
+User=someuser
+Group=someuser
+WorkingDirectory=/piswitch/management
+EnvironmentFile=/etc/piswitch/settings.env
+ExecStart=/usr/bin/env gunicorn \
+    piswitch.wsgi:application \
+    --workers 1 \
+    --bind 0.0.0.0:10000 \
+    --log-level warn \
+    --log-file -
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

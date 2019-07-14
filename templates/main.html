@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% load home_tags %}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<meta name="author" content="Shane Rice"/>
+	<meta name="title" content="PiSwitch Manager"/>
+	<meta name="description" content="Speedrun Results and Estimates"/>
+
+	<title>PiSwitch Manager - {% block title %}{% endblock %}</title>
+
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+
+	<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'font-awesome/css/all.min.css' %}" rel="stylesheet">
+	<link href="{% static 'main/css/main.css' %}" rel="stylesheet">
+
+	{% block head %}{% endblock %}
+</head>
+<body>
+
+<div class="container-fluid">
+    {% block body %}{% endblock %}
+</div>
+
+<script type="text/javascript" src="{% static 'jquery/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'popper/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'font-awesome/js/all.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/main.js' %}"></script>
+
+{% block tail %}{% endblock %}
+
+</body>
+</html>
