@@ -9,7 +9,7 @@ from pprint import pformat
 logger = logging.getLogger('app')
 
 
-def show_settings(request):
+def show_redis(request):
     #  View: /
     data = get_settings()
     logger.debug(data)
@@ -22,14 +22,14 @@ def show_settings(request):
     return render(request, 'home.html', {'data': data, 'form': form})
 
 
-def save_settings(request):
-    #  View: /save
+def save_redis(request):
+    #  View: /saveredis
     logger.debug(pformat(request.POST))
     form = PiSwitchSettings(request.POST)
     if not form.is_valid():
         logger.debug('INVALID FORM --------------')
         messages.add_message(request, messages.ERROR, form.errors, extra_tags='danger')
-        return redirect('home:show')
+        return redirect('home:redis')
     else:
         logger.debug('VALID FORM ++++++++++++++++')
         data = {
@@ -43,7 +43,44 @@ def save_settings(request):
         write_settings(data)
         message = 'Settings successfully saved.'
         messages.add_message(request, messages.SUCCESS, message, extra_tags='success')
-        return redirect('home:show')
+        return redirect('home:redis')
+
+
+# def show_wifi(request):
+#     #  View: /wifi
+#     data = get_settings()
+#     logger.debug(data)
+#     form = PiSwitchSettings()
+#     form.fields['twitch_user'].initial = data['TWITCH_USER']
+#     form.fields['redis_pass'].initial = data['REDIS_PASS']
+#     form.fields['redis_host'].initial = data['REDIS_HOST']
+#     form.fields['redis_port'].initial = data['REDIS_PORT']
+#     form.fields['redis_db'].initial = data['REDIS_DB']
+#     return render(request, 'wifi.html', {'data': data, 'form': form})
+#
+#
+# def save_wifi(request):
+#     #  View: /savewifi
+#     logger.debug(pformat(request.POST))
+#     form = PiSwitchSettings(request.POST)
+#     if not form.is_valid():
+#         logger.debug('INVALID FORM --------------')
+#         messages.add_message(request, messages.ERROR, form.errors, extra_tags='danger')
+#         return redirect('home:redis')
+#     else:
+#         logger.debug('VALID FORM ++++++++++++++++')
+#         data = {
+#             'TWITCH_USER': form.cleaned_data['twitch_user'],
+#             'REDIS_PASS': form.cleaned_data['redis_pass'],
+#             'REDIS_HOST': form.cleaned_data['redis_host'],
+#             'REDIS_PORT': form.cleaned_data['redis_port'],
+#             'REDIS_DB': form.cleaned_data['redis_db'],
+#         }
+#         logger.debug(data)
+#         write_settings(data)
+#         message = 'Settings successfully saved.'
+#         messages.add_message(request, messages.SUCCESS, message, extra_tags='success')
+#         return redirect('home:redis')
 
 
 def get_settings(settings_file='/piswitch/settings.env'):
