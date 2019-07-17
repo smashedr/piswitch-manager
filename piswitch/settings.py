@@ -20,6 +20,9 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+PISWITCH_SETTINGS = os.environ.get('PISWITCH_SETTINGS', '/piswitch/settings.env')
+WIFI_SETTINGS = os.environ.get('WIFI_SETTINGS', '/etc/raspiwifi/raspiwifi.conf')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

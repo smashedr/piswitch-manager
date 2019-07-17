@@ -9,6 +9,8 @@
     <div class="row mt-1">
         <div class="col">
 
+            <h3>Redis Settings</h3>
+
             <form action="{% url 'home:saveredis' %}" method="post">
                 {{ form|crispy  }}
                 <button type="submit" class="btn btn-success">Save Redis Settings</button>

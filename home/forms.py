@@ -1,14 +1,12 @@
 from django import forms
 
 
-class PiSwitchSettings(forms.Form):
+class RedisSettings(forms.Form):
     twitch_user = forms.CharField(max_length=255, label='Twitch Username')
     redis_pass = forms.CharField(max_length=255, label='Redis Password')
     redis_host = forms.CharField(max_length=255, label='Redis Hostname')
     redis_port = forms.IntegerField(label='Redis Port')
     redis_db = forms.IntegerField(label='Redis DB')
-    # wifi_sec_before_auto = forms.IntegerField()
-    # wifi_auto_config = forms.BooleanField(required=False)
 
     def clean_redis_port(self):
         data = self.cleaned_data['redis_port']
@@ -24,9 +22,14 @@ class PiSwitchSettings(forms.Form):
         except:
             raise forms.ValidationError('Please specify a valid db number.')
 
-    # def clean_wifi_sec_before_auto(self):
-    #     data = self.cleaned_data['wifi_sec_before_auto']
-    #     try:
-    #         return int(data)
-    #     except:
-    #         raise forms.ValidationError('Please specify a valid number of seconds.')
+
+class WiFiSettings(forms.Form):
+    wifi_sec_before_auto = forms.IntegerField()
+    wifi_auto_config = forms.BooleanField(required=False)
+
+    def clean_wifi_sec_before_auto(self):
+        data = self.cleaned_data['wifi_sec_before_auto']
+        try:
+            return int(data)
+        except:
+            raise forms.ValidationError('Please specify a valid number of seconds.')

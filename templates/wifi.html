@@ -9,6 +9,10 @@
     <div class="row mt-1">
         <div class="col">
 
+            <h3>WiFi Settings</h3>
+
+            <div class="alert alert-danger">Not Yet Functional</div>
+
             <form action="{% url 'home:savewifi' %}" method="post">
                 {{ form|crispy  }}
                 <button type="submit" class="btn btn-success">Save WiFi Settings</button>
