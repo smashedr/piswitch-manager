@@ -10,8 +10,13 @@ from pprint import pformat
 logger = logging.getLogger('app')
 
 
-def show_redis(request):
+def show_home(request):
     #  View: /
+    return render(request, 'home.html')
+
+
+def show_redis(request):
+    #  View: /redis
     data = get_redis_settings(settings_file=settings.PISWITCH_SETTINGS)
     logger.debug(data)
     form = RedisSettings()
@@ -20,7 +25,7 @@ def show_redis(request):
     form.fields['redis_host'].initial = data['REDIS_HOST']
     form.fields['redis_port'].initial = data['REDIS_PORT']
     form.fields['redis_db'].initial = data['REDIS_DB']
-    return render(request, 'home.html', {'data': data, 'form': form})
+    return render(request, 'redis.html', {'data': data, 'form': form})
 
 
 def save_redis(request):

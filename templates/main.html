@@ -27,7 +27,7 @@
 
     {% block menu %}
         <nav class="navbar navbar-expand-md navbar-light bg-light mt-2">
-            <a class="navbar-brand" href="{% url 'home:redis' %}">PiSwitch</a>
+            <a class="navbar-brand" href="{% url 'home:index' %}">PiSwitch</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar01"
                     aria-controls="navbar01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,6 +36,9 @@
             <div class="collapse navbar-collapse" id="navbar01">
 
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item {% block home_active %}{% endblock %}">
+                        <a class="nav-link" href="{% url 'home:index' %}">Home</a>
+                    </li>
                     <li class="nav-item {% block redis_active %}{% endblock %}">
                         <a class="nav-link" href="{% url 'home:redis' %}">Redis</a>
                     </li>

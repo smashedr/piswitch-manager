@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block title %}Redis Settings{% endblock %}
+{% block redis_active %}active{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+    <div class="row mt-1">
+        <div class="col">
+
+            <h3>Redis Settings</h3>
+
+            <form action="{% url 'home:saveredis' %}" method="post">
+                {{ form|crispy  }}
+                <button type="submit" class="btn btn-success">Save Redis Settings</button>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
