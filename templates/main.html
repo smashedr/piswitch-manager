@@ -25,30 +25,46 @@
 
 <div class="container-fluid">
 
-    {% block menu %}
-        <nav class="navbar navbar-expand-md navbar-light bg-light mt-2">
-            <a class="navbar-brand" href="{% url 'home:index' %}">PiSwitch</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar01"
-                    aria-controls="navbar01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbar01">
-
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {% block home_active %}{% endblock %}">
-                        <a class="nav-link" href="{% url 'home:index' %}">Home</a>
-                    </li>
-                    <li class="nav-item {% block redis_active %}{% endblock %}">
-                        <a class="nav-link" href="{% url 'home:redis' %}">Redis</a>
-                    </li>
-                    <li class="nav-item {% block wifi_active %}{% endblock %}">
-                        <a class="nav-link" href="{% url 'home:wifi' %}">WiFi</a>
-                    </li>
-                </ul>
-
+    {% block status %}
+        <div class="row mt-1">
+            <div class="col">
+                {% if 'piswitch'|check_service_status %}
+                    <div class="alert alert-success">PiSwitch Service is Active.</div>
+                {% else %}
+                    <div class="alert alert-danger">PiSwitch Service is Not Active!</div>
+                {% endif %}
             </div>
-        </nav>
+        </div>
+    {% endblock %}
+
+    {% block menu %}
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-expand-md navbar-light bg-light">
+                    <a class="navbar-brand" href="{% url 'home:index' %}">PiSwitch</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar01"
+                            aria-controls="navbar01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbar01">
+
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item {% block home_active %}{% endblock %}">
+                                <a class="nav-link" href="{% url 'home:index' %}">Home</a>
+                            </li>
+                            <li class="nav-item {% block redis_active %}{% endblock %}">
+                                <a class="nav-link" href="{% url 'home:redis' %}">Redis</a>
+                            </li>
+                            <li class="nav-item {% block wifi_active %}{% endblock %}">
+                                <a class="nav-link" href="{% url 'home:wifi' %}">WiFi</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
     {% endblock %}
 
     {% block heading %}

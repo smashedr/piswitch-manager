@@ -6,12 +6,12 @@
 {% block head %}{% endblock %}
 
 {% block body %}
-    <div class="row mt-1">
+    <div class="row">
         <div class="col">
 
             <h3>WiFi Settings</h3>
 
-            <div class="alert alert-danger">Not Yet Functional</div>
+            <div class="alert alert-warning">Not Yet Functional</div>
 
             <form action="{% url 'home:savewifi' %}" method="post">
                 {{ form|crispy  }}
